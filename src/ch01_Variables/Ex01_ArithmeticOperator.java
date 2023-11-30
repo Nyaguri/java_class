@@ -16,6 +16,32 @@ public class Ex01_ArithmeticOperator {
 		System.out.println("곱셈 결과: " + (num1 * num2));
 		System.out.println("나눗셈 결과: " + (num1 / num2));
 		System.out.println("나머지 결과: " + (num1 % num2));
+		
+		int result = 0;
+		result = num1 + num2;
+		System.out.println(result);
+		result = num1 - num2;
+		System.out.println(result);
+		result = num1 * num2;
+		System.out.println(result);
+		result = num1 / num2;
+		System.out.println(result);
+		result = num1 % num2;
+		System.out.println(result);
+		
+		//계산 결과 변수를 따로 선언
+		int sumResult = num1 + num2;
+		System.out.println(sumResult);
+		int subResult = num1 - num2;
+		System.out.println(subResult);
+		int mulResult = num1 * num2;
+		System.out.println(mulResult);
+		int divResult = num1 / num2;
+		System.out.println(divResult);
+		int remainResult = num1 % num2;
+		System.out.println(remainResult);
+		
+		
 	}
 
 }
