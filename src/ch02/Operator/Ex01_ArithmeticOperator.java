@@ -1,4 +1,4 @@
-package ch01_Variables;
+package ch02.Operator;
 
 public class Ex01_ArithmeticOperator {
 

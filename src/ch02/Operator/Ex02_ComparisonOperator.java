@@ -1,6 +1,6 @@
 package ch02.Operator;
 
-public class Ex02_Operator {
+public class Ex02_ComparisonOperator {
 
 	public static void main(String[] args) {
 		System.out.println(10 > 5);
