@@ -10,7 +10,9 @@ public class Ex08_WhileEx {
         int m; // 출금 
         int loans; // 대출
         int bank; // 은행 선택
-        int account; // 계좌 입력
+        String account; // 계좌 입력
+        int rem = 0; // 송금
+        int balance = 0; // 이체 후 잔액
         while (true) {
             System.out.println("----------------------------------------------------------");
             System.out.println("1.예금 | 2.출금 | 3.이체 | 4.잔고 | 5,대출 | 6.종료");
@@ -33,15 +35,47 @@ public class Ex08_WhileEx {
                 }
             } else if (serv == 3) {
                 System.out.println("이체 하실 은행을 선택 해주세요 > ");
-                System.out.println("011 = 농협 003 = 기업 004 = 국민");
+                System.out.println("1 = 농협 3 = 기업 4 = 국민");
                 bank = scanner.nextInt();
-                if (bank == 011) {
+                if (bank == 1) {
                     System.out.print("농협 은행 : ");
+                    scanner.nextLine();
                     System.out.println("이체 하실 계좌 번호 > ");
-                    account = scanner.nextInt();
+                    account = scanner.nextLine();
                     System.out.println("이체 하실 금액 입력 > ");
-                    pay = scanner.nextInt();
-                    System.out.println("이체 되었습니다. 남은 잔액은 " + pay + "입니다.");
+                    rem = scanner.nextInt();
+                    if (rem <= pay) {
+                        balance = pay - rem;
+                        System.out.println("이체 되었습니다. 남은 잔액은 " + balance + "입니다.");
+                    } else {
+                        System.out.println("이체 실패 했습니다. 남은 잔액을 확인해 주시길 바랍니다.");
+                    }
+                } else if (bank == 3) {
+                    System.out.print("기업 은행 : ");
+                    scanner.nextLine();
+                    System.out.println("이체 하실 계좌 번호 > ");
+                    account = scanner.nextLine();
+                    System.out.println("이체 하실 금액 입력 > ");
+                    rem = scanner.nextInt();
+                    if (rem <= pay) {
+                        balance = pay - rem;
+                        System.out.println("이체 되었습니다. 남은 잔액은 " + balance + "입니다.");
+                    } else {
+                        System.out.println("이체 실패 했습니다. 남은 잔액을 확인해 주시길 바랍니다.");
+                    }
+                } else if (bank == 4) {
+                    System.out.print("국민 은행 : ");
+                    scanner.nextLine();
+                    System.out.println("이체 하실 계좌 번호 > ");
+                    account = scanner.nextLine();
+                    System.out.println("이체 하실 금액 입력 > ");
+                    rem = scanner.nextInt();
+                    if (rem <= pay) {
+                        balance = pay - rem;
+                        System.out.println("이체 되었습니다. 남은 잔액은 " + balance + "입니다.");
+                    } else {
+                        System.out.println("이체 실패 했습니다. 남은 잔액을 확인해 주시길 바랍니다.");
+                    }
                 }
             } else if (serv == 4) {
                 System.out.println("현재 잔액은 " + pay + "입니다.");
