@@ -2,7 +2,7 @@ package ch09_array;
 
 import java.util.Scanner;
 
-public class ExArrayEx {
+public class Ex03_ArrayEx {
     public static void main(String[] args) {
         /**
          * 크기가 3인 정수형 배열을 선언하고
