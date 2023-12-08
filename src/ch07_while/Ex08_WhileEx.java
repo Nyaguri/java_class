@@ -11,8 +11,8 @@ public class Ex08_WhileEx {
         int loans; // 대출
         int bank; // 은행 선택
         String account; // 계좌 입력
-        int rem = 0; // 송금
-        int balance = 0; // 이체 후 잔액
+        int rem; // 송금
+        int balance; // 이체 후 잔액
         while (true) {
             System.out.println("----------------------------------------------------------");
             System.out.println("1.예금 | 2.출금 | 3.이체 | 4.잔고 | 5,대출 | 6.종료");
