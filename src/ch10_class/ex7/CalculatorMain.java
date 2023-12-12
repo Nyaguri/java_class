@@ -23,7 +23,8 @@ public class CalculatorMain {
             } else if (serv == 2) {
                 calculator.sub(20, 10);
             } else if (serv == 3) {
-                calculator.mul(20, 10);
+                int result = calculator.mul(20, 10);
+                System.out.println("result = " + result);
             } else if(serv == 4) {
                 System.out.println(calculator.div());
             } else {
