@@ -61,12 +61,14 @@ public class Book {
         this.bookPublisher = bookPublisher;
     }
 
-    public Book() {
+    private static Long idvalue = 1L;
 
+    public Book() {
+        this.id = idvalue++;
     }
 
-    public Book(Long id, String bookTitle, String bookAuthor, int bookPrice, String bookPublisher) {
-        this.id = id;
+    public Book(String bookTitle, String bookAuthor, int bookPrice, String bookPublisher) {
+        this.id = idvalue++;
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookPrice = bookPrice;
@@ -76,11 +78,11 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", bookTitle='" + bookTitle + '\'' +
-                ", bookAuthor='" + bookAuthor + '\'' +
-                ", bookPrice=" + bookPrice +
-                ", bookPublisher='" + bookPublisher + '\'' +
+                "id: " + id +
+                ", bookTitle: '" + bookTitle + '\'' +
+                ", bookAuthor: '" + bookAuthor + '\'' +
+                ", bookPrice: " + bookPrice +
+                ", bookPublisher: '" + bookPublisher + '\'' +
                 '}';
     }
 }

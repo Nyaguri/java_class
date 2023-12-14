@@ -9,15 +9,18 @@ public class BookMain {
         List<Book> bookList = new ArrayList<>();
         // 기본생성자로 Book 객체(book1) 생성 후 bookList 에 추가
         Book book1 = new Book();
-        book1.setId(1L);
+//        book1.setId(1L);
         book1.setBookTitle("전지적 독자 시점");
         book1.setBookAuthor("싱숑");
         book1.setBookPrice(12150);
         book1.setBookPublisher("문피아");
         bookList.add(book1);
         // 매개변수 생성자로 Book 객체(book2) 생성 후 bookList 에 추가
-        Book book2 = new Book(2L, "테메레르", "나오미 노빅", 10800, "노블마인");
+        Book book2 = new Book("테메레르", "나오미 노빅", 10800, "노블마인");
         bookList.add(book2);
+
+        Book book3 = new Book("셜록 홈즈", "아서 코난 도일", 9000, "파주books");
+        bookList.add(book3);
         // for 를 이용하여 bookList 의 전체 데이터 출력
         for (int i = 0; i < bookList.size(); i++) {
             System.out.println("bookList = " + bookList.get(i));
