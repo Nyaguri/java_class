@@ -48,7 +48,6 @@ public class StudentDTO {
     }
 
     public StudentDTO() {
-
     }
 
     private static Long idValue = 1L;
