@@ -1,18 +1,9 @@
 package ch11_classes.ex4;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BoardDTO {
-    /**
-     * 필드
-     * id
-     * 글제목(boardTitle)
-     * 작성자(boardWriter)
-     * 내용(boardContents)
-     * 비밀번호(boardPass)
-     *
-     * 생성자
-     *
-     * toString
-     */
     private Long id;
     private String boardTitle;
     private String boardWriter;
@@ -90,7 +81,7 @@ public class BoardDTO {
         this.boardContents = boardContents;
         this.boardPass = boardPass;
         this.boardHits = Hits;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     @Override
@@ -100,6 +91,7 @@ public class BoardDTO {
                 "작성자 : " + boardWriter + '\n' +
                 "글 내용 : " + boardContents + '\n' +
                 "비밀번호 : " + boardPass + '\n' +
-                "조회수 : " + boardHits;
+                "조회수 : " + boardHits + '\n' +
+                "createdAt=" + createdAt;
     }
 }

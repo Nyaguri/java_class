@@ -29,10 +29,7 @@ public class BoardService {
 
     public void list() {
         List<BoardDTO> boardDTOList = boardRepository.list();
-        System.out.println("번호\t" + "제목\t" + "작성자\t" + "조회 수\t");
-        for (BoardDTO boardDTO : boardDTOList) {
-            System.out.println(boardDTO.getId() + "\t\t" + boardDTO.getBoardTitle() + "\t" + boardDTO.getBoardWriter() + "\t" + boardDTO.getBoardHits());
-        }
+        listPrint(boardDTOList);
     }
 
     public void findById() {
@@ -88,13 +85,24 @@ public class BoardService {
     public void search() {
         System.out.print("검색어: ");
         String bookTitle = scanner.next();
-        List<BoardDTO> boardDTOList = boardRepository.search(bookTitle);
-        if (boardDTOList.size() > 0) {
-            for (BoardDTO boardDTO : boardDTOList) {
-                System.out.println(boardDTO);
-            }
+        List<BoardDTO> searchList = boardRepository.search(bookTitle);
+        if (searchList.size() > 0) {
+            System.out.println("검색 결과");
+            // 출력 전용 메서드로 검색결과 리스트를 넘겨줌
+            listPrint(searchList);
         } else {
-            System.out.println("검색 결과가 없습니다.");
+            System.out.println("검색결과가 없습니다!");
+        }
+    }
+
+    // 목록 출력 전용 메서드
+    // findById, search 메서드로 부터 list 데이터를 전달 받아서 출력을 하는 메서드
+    private void listPrint(List<BoardDTO> boardDTOList) {
+        System.out.println("id\t" + "title\t" + "writer\t" + "hits\t" + "date\t");
+        for (BoardDTO boardDTO: boardDTOList) {
+            System.out.println(boardDTO.getId() + "\t" + boardDTO.getBoardTitle() + "\t" +
+                    boardDTO.getBoardWriter() + "\t" + boardDTO.getBoardHits() + "\t" +
+                    boardDTO.getCreatedAt() + "\t");
         }
     }
 }
