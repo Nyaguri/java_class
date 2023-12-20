@@ -9,9 +9,9 @@ public class BoardMain {
         boolean run = true;
         int serv = 0;
         while (run) {
-            System.out.println("--------------------------------------------------------------------------------------");
-            System.out.println("1. 글 작성 | 2. 글 목록 | 3. 글 조회 | 4. 글 수정 | 5. 글 삭제 | 6. 검색 | 0.종료");
-            System.out.println("--------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------");
+            System.out.println("1. 글 작성 | 2. 글 목록 | 3. 글 조회 | 4. 글 수정 | 5. 글 삭제 | 6. 검색 | 7. 캐스트데이터 | 0.종료");
+            System.out.println("--------------------------------------------------------------------------------------------------------");
             System.out.print("선택 > ");
             serv = scanner.nextInt();
             if (serv == 1) {
@@ -32,6 +32,8 @@ public class BoardMain {
             } else if (serv == 6) {
                 // 호출 할 문장
                 boardService.search();
+            } else if (serv == 7) {
+                boardService.testData();
             } else if (serv == 0) {
                 System.out.println("종료합니다.");
                 break;
