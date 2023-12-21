@@ -54,9 +54,9 @@ public class BankService {
             boolean result = bankRepository.accountCheck2(accountNumber);
             if (result) {
                 System.out.print("입금할 금액 : ");
-                Long deposit = scanner.nextLong();
+                Long money = scanner.nextLong();
                 String clientCreatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm:ss"));
-                bankRepository.deposit(accountNumber, deposit, clientCreatedAt);
+                bankRepository.deposit(accountNumber, money, clientCreatedAt);
                 run = false;
             } else {
                 System.out.println("없는 계좌번호 입니다.");
@@ -74,9 +74,9 @@ public class BankService {
                 System.out.print("비밀번호 : ");
                 String clientPass = scanner.next();
                 System.out.print("출금할 금액 : ");
-                Long withdraw = scanner.nextLong();
+                Long money = scanner.nextLong();
                 String clientCreatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm:ss"));
-                bankRepository.withdraw(accountNumber, clientPass, withdraw, clientCreatedAt);
+                bankRepository.withdraw(accountNumber, clientPass, money, clientCreatedAt);
                 run = false;
             } else {
                 System.out.println("없는 계좌번호 입니다.");
@@ -111,6 +111,39 @@ public class BankService {
             }
         } else {
             System.out.println("없는 계좌번호 입니다.");
+        }
+    }
+
+    public void accountTransfer() {
+        System.out.print("보내실 분 계좌번호 : ");
+        String accountNumberFrom = scanner.next();
+        System.out.print("받으실 분 계좌번호 : ");
+        String accountNumberTo = scanner.next();
+        System.out.print("보낼 금액 : ");
+        Long money = scanner.nextLong();
+        ClientDTO clientTo = bankRepository.accountCheck3(accountNumberTo);
+        ClientDTO clientFrom = bankRepository.accountCheck3(accountNumberFrom);
+        if (clientTo != null && clientFrom != null) {
+            System.out.println("받으실 분이 " + clientTo.getClientName() + "님이 맞습니까?");
+            System.out.println("맞으면 1번, 틀리면 2번을 입력해주세요.");
+            System.out.print("입력> ");
+            serv1 = scanner.nextInt();
+            if (serv1 == 1) {
+                System.out.print("비밀번호를 입력해주세요: ");
+                String clientPass = scanner.next();
+                if (clientPass.equals(clientFrom.getClientPass()) && money <= clientFrom.getBalance()) {
+                    bankRepository.accountTransfer(accountNumberFrom, accountNumberTo, money);
+                    System.out.println("이체가 완료 되었습니다.");
+                } else if (!clientPass.equals(clientFrom.getClientPass())) {
+                    System.out.println("비밀번호가 틀립니다");
+                } else if (money > clientFrom.getBalance()) {
+                    System.out.println("잔액이 부족합니다.");
+                }
+            } else if (serv1 == 2) {
+                System.out.println("메인메뉴로 돌아갑니다.");
+            }
+        }else {
+            System.out.println("해당 계좌가 존재하지 않습니다.");
         }
     }
 }
