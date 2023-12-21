@@ -2,7 +2,6 @@ package ch11_classes.ex5;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Scanner;
 
 public class BankService {

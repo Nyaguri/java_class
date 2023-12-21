@@ -13,9 +13,10 @@ public class BankRepository {
 
     public boolean accountCheck(String accountNumber) {
         boolean result = true;
-        for (int i = 0; i < clientDTOList.size(); i++) {
-            if (accountNumber.equals(clientDTOList.get(i).getAccountNumber())) {
+        for (ClientDTO clientDTO : clientDTOList) {
+            if (accountNumber.equals(clientDTO.getAccountNumber())) {
                 result = false;
+                break;
             }
         }
         return result;
@@ -23,9 +24,10 @@ public class BankRepository {
 
     public boolean accountCheck2(String accountNumber) {
         boolean result = false;
-        for (int i = 0; i < clientDTOList.size(); i++) {
-            if (accountNumber.equals(clientDTOList.get(i).getAccountNumber())) {
+        for (ClientDTO clientDTO : clientDTOList) {
+            if (accountNumber.equals(clientDTO.getAccountNumber())) {
                 result = true;
+                break;
             }
         }
         return result;
@@ -41,18 +43,10 @@ public class BankRepository {
     }
 
     public boolean balanceInquiry(String accountNumber) {
-//        String string = "없는 계좌 번호 입니다.";
-//        for (ClientDTO clientDTO : clientDTOList) {
-//            if (clientDTO.getAccountNumber().equals(accountNumber)) ;
-//            string = clientDTO.getClientName() + "님의 현재 잔액 : " + clientDTO.getBalance() + "원 입니다.";
-//            break;
-//        }
-//        return string;
-//    }
         boolean result = false;
-        for (int i = 0; i < clientDTOList.size(); i++) {
-            if (accountNumber.equals(clientDTOList.get(i).getAccountNumber())) {
-                System.out.println((clientDTOList.get(i).getClientName() + "님의" + " 잔액은 " + clientDTOList.get(i).getBalance() + "원 입니다."));
+        for (ClientDTO clientDTO : clientDTOList) {
+            if (accountNumber.equals(clientDTO.getAccountNumber())) {
+                System.out.println((clientDTO.getClientName() + "님의" + " 잔액은 " + clientDTO.getBalance() + "원 입니다."));
                 result = true;
             }
         }
@@ -86,41 +80,41 @@ public class BankRepository {
     }
 
     public void historyAll(String accountNumber) {
-        for (int i = 0; i < accountDTOList.size(); i++) {
-            if (accountNumber.equals(accountDTOList.get(i).getAccountNumber())) {
-                System.out.println("accountDTOList = " + accountDTOList.get(i));
+        for (AccountDTO accountDTO : accountDTOList) {
+            if (accountNumber.equals(accountDTO.getAccountNumber())) {
+                System.out.println("accountDTOList = " + accountDTO);
             }
         }
     }
 
     public void historyDeposit(String accountNumber) {
-        for (int i = 0; i < accountDTOList.size(); i++) {
-            if (accountNumber.equals(accountDTOList.get(i).getAccountNumber())) {
-                System.out.println("accountDTOList = " + accountDTOList.get(i).getDeposit());
+        for (AccountDTO accountDTO : accountDTOList) {
+            if (accountNumber.equals(accountDTO.getAccountNumber())) {
+                System.out.println("accountDTOList = " + accountDTO.getDeposit());
             }
         }
     }
 
     public void historyWithdraw(String accountNumber) {
-        for (int i = 0; i < accountDTOList.size(); i++) {
-            if (accountNumber.equals(accountDTOList.get(i).getAccountNumber())) {
-                System.out.println("accountDTOList = " + accountDTOList.get(i).getWithdraw());
+        for (AccountDTO accountDTO : accountDTOList) {
+            if (accountNumber.equals(accountDTO.getAccountNumber())) {
+                System.out.println("accountDTOList = " + accountDTO.getWithdraw());
             }
         }
     }
 
     public void accountTransfer(String accountNumberFrom, String accountNumberTo, Long money) {
-        for (int i = 0; i < clientDTOList.size(); i++) {
-            if (accountNumberFrom.equals(clientDTOList.get(i).getAccountNumber())) {
-                long balance = clientDTOList.get(i).getBalance();
+        for (ClientDTO clientDTO : clientDTOList) {
+            if (accountNumberFrom.equals(clientDTO.getAccountNumber())) {
+                long balance = clientDTO.getBalance();
                 balance = balance - money;
-                clientDTOList.get(i).setBalance(balance);
+                clientDTO.setBalance(balance);
                 AccountDTO accountDTO = new AccountDTO(accountNumberFrom, 0L, money);
                 accountDTOList.add(accountDTO);
-            } else if (accountNumberTo.equals(clientDTOList.get(i).getAccountNumber())) {
-                long balance = clientDTOList.get(i).getBalance();
+            } else if (accountNumberTo.equals(clientDTO.getAccountNumber())) {
+                long balance = clientDTO.getBalance();
                 balance = balance + money;
-                clientDTOList.get(i).setBalance(balance);
+                clientDTO.setBalance(balance);
                 AccountDTO accountDTO = new AccountDTO(accountNumberTo, money, 0L);
                 accountDTOList.add(accountDTO);
             }
