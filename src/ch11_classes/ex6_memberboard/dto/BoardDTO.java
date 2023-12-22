@@ -60,13 +60,14 @@ public class BoardDTO {
     }
 
     private static Long idValue = 1L;
+    private static Long hits = 0L;
 
-    public BoardDTO(String boardTitle, String boardWriter, String boardContents, Long boardHits) {
+    public BoardDTO(String boardTitle, String boardWriter, String boardContents) {
         this.id = idValue++;
         this.boardTitle = boardTitle;
         this.boardWriter = boardWriter;
         this.boardContents = boardContents;
-        this.boardHits = boardHits;
+        this.boardHits = hits;
         this.boardCreatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
