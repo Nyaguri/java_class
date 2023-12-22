@@ -31,7 +31,7 @@ public class BoardService {
                 } else if (serv == 5) {
                     delete();
                 } else if (serv == 6) {
-                    // 호출할 문장
+                    search();
                 } else if (serv == 0) {
                     // 호출할 문장
                     break;
@@ -107,6 +107,18 @@ public class BoardService {
             } else {
                 System.out.println("작성자만 삭제 가능합니다.");
             }
+        }
+    }
+
+    public void search() {
+        System.out.print("검색어 : ");
+        String boardTitle = sc.next();
+        List<BoardDTO> searchList = boardRepository.search(boardTitle);
+        if (!searchList.isEmpty()) {
+            System.out.println("검색 결과 : ");
+            listPrint(searchList);
+        }else {
+            System.out.println("검색 결과가 없습니다.");
         }
     }
 
