@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CommentDTO {
     private Long id;
-    private String boardId;
+    private Long boardId;
     private String commentWriter;
     private String commentContents;
     private String commentCreatedAt;
@@ -18,11 +18,11 @@ public class CommentDTO {
         this.id = id;
     }
 
-    public String getBoardId() {
+    public Long getBoardId() {
         return boardId;
     }
 
-    public void setBoardId(String boardId) {
+    public void setBoardId(Long boardId) {
         this.boardId = boardId;
     }
 
@@ -50,10 +50,11 @@ public class CommentDTO {
         this.commentCreatedAt = commentCreatedAt;
     }
 
-    private static Long idValue = 0L;
-    public CommentDTO(String boardId, String commentWriter, String commentContents) {
+    private static Long idValue = 1L;
+    private static Long BoardId = 1L;
+    public CommentDTO(String commentWriter, String commentContents) {
         this.id = idValue++;
-        this.boardId = boardId;
+        this.boardId = BoardId++;
         this.commentWriter = commentWriter;
         this.commentContents = commentContents;
         this.commentCreatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -61,12 +62,10 @@ public class CommentDTO {
 
     @Override
     public String toString() {
-        return "CommentDTO{" +
-                "id=" + id +
-                ", boardId='" + boardId + '\'' +
-                ", commentWriter='" + commentWriter + '\'' +
-                ", commentContents='" + commentContents + '\'' +
-                ", commentCreatedAt='" + commentCreatedAt + '\'' +
-                '}';
+        return "id : " + id + "\n" +
+                "글 번호 : " + boardId + "\n" +
+                "작성자 : " + commentWriter + "\n" +
+                "댓글 내용 : " + commentContents + "\n" +
+                "작성 시간" + commentCreatedAt;
     }
 }

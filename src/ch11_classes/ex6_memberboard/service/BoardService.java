@@ -1,20 +1,25 @@
 package ch11_classes.ex6_memberboard.service;
 
+import ch11_classes.ex6_memberboard.MainController;
 import ch11_classes.ex6_memberboard.common.CommonVariables;
 import ch11_classes.ex6_memberboard.dto.BoardDTO;
+import ch11_classes.ex6_memberboard.dto.CommentDTO;
 import ch11_classes.ex6_memberboard.repository.BoardRepository;
+import ch11_classes.ex6_memberboard.repository.CommentRepository;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class BoardService {
     BoardRepository boardRepository = new BoardRepository();
+    CommentRepository commentRepository = new CommentRepository();
     Scanner sc = new Scanner(System.in);
     int serv;
 
     public void boardMenu() {
         while (true) {
             if (CommonVariables.loginEmail != null) {
+                System.out.println("======  게시판  ======");
                 System.out.println("------------------------------------------------------------------------------------------------------------");
                 System.out.println("1. 글 작성 | 2. 글 목록 | 3. 글 조회 | 4. 글 수정 | 5. 글 삭제 | 6. 검색 | 99. sample | 0. 메인메뉴");
                 System.out.println("------------------------------------------------------------------------------------------------------------");
@@ -33,7 +38,7 @@ public class BoardService {
                 } else if (serv == 6) {
                     search();
                 } else if (serv == 0) {
-                    // 호출할 문장
+                    System.out.println("메인 메뉴로 돌아갑니다.");
                     break;
                 } else {
                     System.out.println("잘못 입력하였습니다. 다시 입력 바랍니다.");
@@ -72,6 +77,26 @@ public class BoardService {
         boardRepository.hitsUp(id);
         if (boardDTO != null) {
             System.out.println(boardDTO);
+            while (true) {
+                System.out.println("======  댓글  ======");
+                System.out.println("댓글을 작성 하시려면 1번을 입력해주세요." + '\n' + "메인 메뉴로 돌아가려면 2번을 입력해주세요.");
+                System.out.print("입력 > ");
+                serv = sc.nextInt();
+                if (serv == 1) {
+                    System.out.print("댓글 내용 : ");
+                    String commentContents = sc.next();
+                    String commentWriter = CommonVariables.loginEmail;
+                    CommentDTO commentDTO = new CommentDTO(commentWriter, commentContents);
+                    boolean result = commentRepository.comment(commentDTO);
+                    List<CommentDTO> commentDTOList = commentRepository.list();
+                    listPrint2(commentDTOList);
+                } else if (serv == 2) {
+                    boardMenu();
+                    break;
+                }else {
+                    System.out.println("잘못 입력 하셨습니다. 다시 입력 바랍니다.");
+                }
+            }
         } else {
             System.out.println("조회 결과가 없습니다.");
         }
@@ -124,11 +149,19 @@ public class BoardService {
 
 
     private void listPrint(List<BoardDTO> boardDTOList) {
-        System.out.println("id\t" + "title\t" + "writer\t" + "hits\t" + "date\t");
+        System.out.println("id\t" + "\t" + "title\t" + "\t" + "writer\t" + "\t" + "hits\t" + "\t" + "date\t");
         for (BoardDTO boardDTO : boardDTOList) {
-            System.out.println(boardDTO.getId() + "\t" + boardDTO.getBoardTitle() + "\t" +
-                    boardDTO.getBoardWriter() + "\t" + boardDTO.getBoardHits() + "\t" +
-                    boardDTO.getBoardCreatedAt() + "\t");
+            System.out.println(boardDTO.getId() + "\t" + "\t" + boardDTO.getBoardTitle() + "\t" + "\t" +
+                    boardDTO.getBoardWriter() + "\t" + "\t" + "\t" + boardDTO.getBoardHits() + "\t" + "\t" + "\t" +
+                    boardDTO.getBoardCreatedAt());
+        }
+    }
+
+    private void listPrint2(List<CommentDTO> commentDTOList) {
+        System.out.println("boardId\t" +"\t" + "writer\t" + "\t" + "comment\t" + "\t" + "date\t");
+        for (CommentDTO commentDTO : commentDTOList) {
+            System.out.println("\t" + commentDTO.getBoardId() +"\t" +  "\t" + "\t" + "\t" + commentDTO.getCommentWriter() +"\t" +  "\t" + "\t" +
+                    commentDTO.getCommentContents() + "\t" + "\t" + "\t" + "\t" + "\t" + commentDTO.getCommentCreatedAt());
         }
     }
 }
